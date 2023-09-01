@@ -118,8 +118,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         }
     }
     function handleClose() {
-        var todoId = this.parentElement.dataset.id;
-        deleteTodo(todoId);
+        var parent = this.parentElement;
+        if (parent) {
+            var todoId = parent.dataset.id;
+            todoId && deleteTodo(todoId);
+        }
     }
     // Async logic
     function getAllTodos() {
@@ -138,7 +141,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                         return [2 /*return*/, data];
                     case 3:
                         error_1 = _a.sent();
-                        alertError(error_1);
+                        if (error_1 instanceof Error) {
+                            alertError(error_1);
+                            return [2 /*return*/, []];
+                        }
                         return [3 /*break*/, 4];
                     case 4: return [2 /*return*/];
                 }
@@ -161,7 +167,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                         return [2 /*return*/, data];
                     case 3:
                         error_2 = _a.sent();
-                        alertError(error_2);
+                        if (error_2 instanceof Error) {
+                            alertError(error_2);
+                            return [2 /*return*/, []];
+                        }
                         return [3 /*break*/, 4];
                     case 4: return [2 /*return*/];
                 }
@@ -191,7 +200,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                         return [3 /*break*/, 4];
                     case 3:
                         error_3 = _a.sent();
-                        alertError(error_3);
+                        if (error_3 instanceof Error) {
+                            alertError(error_3);
+                        }
                         return [3 /*break*/, 4];
                     case 4: return [2 /*return*/];
                 }
@@ -220,7 +231,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                         return [3 /*break*/, 3];
                     case 2:
                         error_4 = _a.sent();
-                        alertError(error_4);
+                        if (error_4 instanceof Error) {
+                            alertError(error_4);
+                        }
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
                 }
@@ -251,7 +264,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                         return [3 /*break*/, 3];
                     case 2:
                         error_5 = _a.sent();
-                        alertError(error_5);
+                        if (error_5 instanceof Error) {
+                            alertError(error_5);
+                        }
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
                 }

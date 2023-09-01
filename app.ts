@@ -120,13 +120,17 @@ interface User {
       todoId && toggleTodoComplete(todoId, completed);
     }
   }
-  function handleClose() {
-    const todoId = this.parentElement.dataset.id;
-    deleteTodo(todoId);
+  function handleClose(this: HTMLSpanElement) {
+    const parent = this.parentElement;
+    
+    if(parent){
+      const todoId = parent.dataset.id;
+      todoId && deleteTodo(todoId);
+    }
   }
 
   // Async logic
-  async function getAllTodos() {
+  async function getAllTodos(){
     try {
       const response = await fetch(
         'https://jsonplaceholder.typicode.com/todos?_limit=15'
@@ -135,11 +139,15 @@ interface User {
 
       return data;
     } catch (error) {
-      alertError(error);
+      if(error instanceof Error){
+        alertError(error);
+
+        return [];
+      }
     }
   }
 
-  async function getAllUsers() {
+  async function getAllUsers(){
     try {
       const response = await fetch(
         'https://jsonplaceholder.typicode.com/users?_limit=5'
@@ -148,7 +156,11 @@ interface User {
 
       return data;
     } catch (error) {
-      alertError(error);
+      if(error instanceof Error){
+        alertError(error);
+
+        return[];
+      }
     }
   }
 
@@ -169,11 +181,13 @@ interface User {
 
       printTodo(newTodo);
     } catch (error) {
-      alertError(error);
+      if(error instanceof Error){
+        alertError(error);
+      }
     }
   }
 
-  async function toggleTodoComplete(todoId: ID, completed) {
+  async function toggleTodoComplete(todoId: ID, completed: boolean) {
     try {
       const response = await fetch(
         `https://jsonplaceholder.typicode.com/todos/${todoId}`,
@@ -190,7 +204,9 @@ interface User {
         throw new Error('Failed to connect with the server! Please try later.');
       }
     } catch (error) {
-      alertError(error);
+      if(error instanceof Error){
+        alertError(error);
+      }
     }
   }
 
@@ -212,7 +228,9 @@ interface User {
         throw new Error('Failed to connect with the server! Please try later.');
       }
     } catch (error) {
-      alertError(error);
+      if(error instanceof Error){
+        alertError(error);
+      }
     }
   }
 })()
